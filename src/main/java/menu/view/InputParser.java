@@ -18,12 +18,22 @@ public class InputParser {
         return names;
     }
 
+    public List<String> parseNotEatMenu(String input){
+        List<String> menus = Arrays.asList(input.split(","));
+        validateMenus(menus);
+        return menus;
+    }
+
     private void validateCoach(List<String> names) {
         for (String name : names) {
             validateNameLength(name);
         }
 
         validateCoachCount(names);
+    }
+
+    private void validateMenus(List<String> menus){
+
     }
 
     private void validateNameLength(String name) {

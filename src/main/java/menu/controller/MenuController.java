@@ -1,6 +1,7 @@
 package menu.controller;
 
 import java.util.List;
+import java.util.Map;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -15,7 +16,8 @@ public class MenuController {
 
     public void run() {
         outputView.printApplicationInitGuide();
-        readCoachNames();
+        List<String> coachNames = readCoachNames();
+        Map<String, List<String>> notEatMenus = readNotEatMenu(coachNames);
     }
 
     private List<String> readCoachNames() {
@@ -24,6 +26,15 @@ public class MenuController {
         } catch (IllegalArgumentException e) {
             outputView.printErrorMessage(e.getMessage());
             return readCoachNames();
+        }
+    }
+
+    private Map<String, List<String>> readNotEatMenu(List<String> coachNames) {
+        try {
+            return inputView.readNotEatMenu(coachNames);
+        } catch (IllegalArgumentException e) {
+            outputView.printErrorMessage(e.getMessage());
+            return readNotEatMenu(coachNames);
         }
     }
 }
